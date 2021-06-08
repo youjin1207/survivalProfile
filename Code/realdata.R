@@ -20,14 +20,14 @@ center.name = names(table(subdat$REC_CTR_ID))
 subdat = subdat[order(subdat$folltime),]
 
 ## fit a stratified cox proportional model
-fit.cox = coxph( Surv(folltime, GF) ~ delayed + age50 + year2010 + yrs_wl + log_KDRI +
+fit.cox = coxph( Surv(folltime, GF) ~ age50 + year2010 + yrs_wl + log_KDRI +
                    rec_hcv + diag_poly + diag_hyper + diag_other + diabetes + BMI + 
                    yrs_dial + female + race_Black + race_Hispanic + race_Asian + 
                    race_Other + blood_a + blood_ab + blood_b + copd + hyperten + malig + 
                    ins_private + strata(REC_CTR_ID), data = subdat) 
 
 ## fit a multivariate propensity score model 
-fit.multinom = multinom(REC_CTR_ID ~ delayed + age50 + year2010 + yrs_wl + log_KDRI +
+fit.multinom = multinom(REC_CTR_ID ~ age50 + year2010 + yrs_wl + log_KDRI +
                           rec_hcv + diag_poly + diag_hyper + diag_other + diabetes + BMI + 
                           yrs_dial + female + race_Black + race_Hispanic + race_Asian + 
                           race_Other + blood_a + blood_ab + blood_b + copd + hyperten + malig + 

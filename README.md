@@ -1,4 +1,4 @@
-# Direct standardization method for evaluating center effects on survival outcomes
+# Prognostic score-based methods for estimating center effects based on survival proability
 
 Youjin Lee and Douglas E. Schaubel
 
