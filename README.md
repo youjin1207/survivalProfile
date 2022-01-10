@@ -1,15 +1,15 @@
-# Prognostic score-based methods for estimating center effects based on survival proability
+# Prognostic score-based methods for estimating center effects based on survival probability: Application to post-kidney transplant survival
 
-Youjin Lee and Douglas E. Schaubel
+Youjin Lee, Peter P. Reese, and Douglas E. Schaubel
 
 ## Data
 
 
 ## Code
 
-- `Code/aux.R` : provides auxiliary functions that estimate the variance of the weighted cumulative hazards and to derive a prognostic score from a stratified additive hazards model.
+- `Code/aux.R` : provides auxiliary functions that estimate the variance of the weighted cumulative hazards and derive prognostic scores from a stratified additive hazards model.
 
-- `Code/sim.R`: generates the simulated data and estimates the center effects using the prognostic scores.
+- `Code/sim.R`: generates the simulated data and estimates the center effects using prognostic scores.
 
 - `Code/realdata.R`:  reads the real data example and estimates the center effects using the proposed methods.
 
