@@ -1,7 +1,10 @@
-## Simulations study ##
+## This code generates the simulated data and estimates the center effects using prognostic scores. 
+## This code can be used to reproduce Tables 1 and 2 in the main manuscript and Table S1 in the Supporting Information.
+
 library(MASS)
 library(survival)
 source("Code/aux.R")
+
 ## (1) generates the survival outcomes from a Cox model 
 set.seed(1234)
 randoms = sample(1:100, 100)
@@ -12,19 +15,18 @@ time.list = c(5, 10)
 cox_results = list()
 for(ii in 1:500){
   set.seed(ii)
-  ##### 
+
   J = 100 # the number of centers 
   nJ = 200 # the number of subjects per each center
   N = J*nJ # total number of subjects in the simulated data
-
+  
   # generate baseline covariates distribution 
   X1 = X2 = X3 = X4 = X5 = matrix(0, nrow = J, ncol = nJ)
   T0 = base.T0 = Delta = C0 = Censor = Y0 = matrix(0, nrow = J, ncol = nJ);
   betas = c(1, 1, 1, 1, 1)
 
   for(j in 1:J){
-    prob = c(rep(0.1-0.001*(j-1), 3), rep(0.1, 4), rep(0.1+0.001*(j-1), 3)) # scenario (ii)
-    #prob = c(rep(0.1-0.001*(j-1), 5), rep(0.1+0.001*(j-1), 5))
+    prob = c(rep(0.1-0.001*(j-1), 3), rep(0.1, 4), rep(0.1+0.001*(j-1), 3))
     X1[j,] = apply(rmultinom(nJ, 1, prob = prob), 2, function(x) which(x == 1)) / 10
     X2[j,] = apply(rmultinom(nJ, 1, prob = prob), 2, function(x) which(x == 1)) / 10
     X3[j,] = apply(rmultinom(nJ, 1, prob = prob), 2, function(x) which(x == 1)) / 10
@@ -65,7 +67,7 @@ for(ii in 1:500){
     tmp.center = sim1[sim1$center == j,]
     nJ = nrow(tmp.center)
     order.center = tmp.center[order(tmp.center$timeto),]
-    ## cox weight
+
     table.mat = as.numeric(table(sim1$all.cox.class)) / nrow(sim1)
     center.observed.cox = c()
     for(q in 1:5){
@@ -142,8 +144,7 @@ for(ii in 1:500){
 }
 
 
-
-
+###############################################
 ## (2) generates the survival outcomes from an additive hazard model
 set.seed(1234)
 randoms = sample(1:100, 100)
